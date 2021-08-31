@@ -61,10 +61,10 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.838"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.041" />
+        app:layout_constraintVertical_bias="0.042" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -72,10 +72,10 @@
         android:layout_height="72dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.244"
+        app:layout_constraintHorizontal_bias="0.118"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.04"
+        app:layout_constraintVertical_bias="0.042"
         app:srcCompat="@android:drawable/btn_star_big_on" />
 
     <Button
@@ -125,9 +125,20 @@
         android:text="To Setting"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.896"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.593" />
+        app:layout_constraintVertical_bias="0.609" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/taskRecucleView"
+        android:layout_width="165dp"
+        android:layout_height="130dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.161"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.648" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
