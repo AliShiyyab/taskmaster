@@ -6,8 +6,10 @@
         <entry key="app/src/main/res/layout/activity_add_tasks.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_all_tasks.xml" value="0.16510416666666666" />
         <entry key="app/src/main/res/layout/activity_details.xml" value="0.16510416666666666" />
+        <entry key="app/src/main/res/layout/activity_fragment_task.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.15" />
+        <entry key="app/src/main/res/layout/activity_task_adapter.xml" value="0.16510416666666666" />
       </map>
     </option>
   </component>

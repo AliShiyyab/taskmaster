@@ -1,6 +1,8 @@
 package com.example.taskmaster;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +13,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -83,6 +88,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(gotToSetting);
             }
         });
+        List<Task> listTask = new ArrayList<Task>();
+        listTask.add(new Task("401-java","Java and android","new"));
+        listTask.add(new Task("401-python","Django and machine learning","new"));
+        listTask.add(new Task("401-JavaScript","React and React Native","new"));
+        listTask.add(new Task("301","React and Node","new"));
+
+        RecyclerView allTasksRecuclerView = findViewById(R.id.taskRecucleView);
+        allTasksRecuclerView.setLayoutManager(new LinearLayoutManager(this));
+        allTasksRecuclerView.setAdapter(new ViewAdapter(listTask));
 
     }
     @Override
