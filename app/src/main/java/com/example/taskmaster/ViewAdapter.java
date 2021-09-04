@@ -1,5 +1,6 @@
 package com.example.taskmaster;
 
+import android.content.Intent;
 import android.view.ViewGroup;
 import android.view.View;
 import android.widget.TextView;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Delete;
 
 import com.example.taskmaster.R;
 
@@ -27,6 +29,13 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.TaskViewHolder
         public TaskViewHolder(@NonNull View itemView){
             super(itemView);
             this.itemView = itemView;
+            itemView.setOnClickListener(View->{
+                Intent intent = new Intent(View.getContext(), Details.class);
+                intent.putExtra("TaskName" , task.getTitle());
+                intent.putExtra("TaskBody" , task.getBody());
+                intent.putExtra("TaskState" , task.getState());
+                View.getContext().startActivity(intent);
+            });
         }
     }
 

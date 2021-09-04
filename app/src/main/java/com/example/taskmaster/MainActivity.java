@@ -3,6 +3,7 @@ package com.example.taskmaster;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,6 +20,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    TaskDAO taskDAO;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,13 +90,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(gotToSetting);
             }
         });
-        List<Task> listTask = new ArrayList<Task>();
-        listTask.add(new Task("401-java","Java and android","new"));
-        listTask.add(new Task("401-python","Django and machine learning","new"));
-        listTask.add(new Task("401-JavaScript","React and React Native","new"));
-        listTask.add(new Task("301","React and Node","new"));
-
+        TaskDataBase db = Room.databaseBuilder(getApplicationContext(), TaskDataBase.class, "task")
+                .allowMainThreadQueries().build();
         RecyclerView allTasksRecuclerView = findViewById(R.id.taskRecucleView);
+        List<Task> listTask;
+        taskDAO = db.taskDAO();
+        listTask = taskDAO.getAll();
         allTasksRecuclerView.setLayoutManager(new LinearLayoutManager(this));
         allTasksRecuclerView.setAdapter(new ViewAdapter(listTask));
 
