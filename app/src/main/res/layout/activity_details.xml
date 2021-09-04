@@ -22,6 +22,21 @@
         app:layout_constraintVertical_bias="0.111" />
 
     <TextView
+        android:id="@+id/States"
+        android:layout_width="275dp"
+        android:layout_height="85dp"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        android:text="States"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.842" />
+
+    <TextView
         android:id="@+id/detaildDescribe"
         android:layout_width="338dp"
         android:layout_height="192dp"
@@ -30,6 +45,8 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailHead" />
+        app:layout_constraintTop_toBottomOf="@+id/detailHead"
+        app:layout_constraintVertical_bias="0.292" />
 </androidx.constraintlayout.widget.ConstraintLayout>
