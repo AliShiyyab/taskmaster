@@ -29,6 +29,10 @@ public class Setting extends AppCompatActivity {
 
             sharedPreferencesEditor.putString("userName", userName);
             sharedPreferencesEditor.apply();
+
+            //Intent to MainActivity when clicked!
+            Intent goToMain = new Intent(Setting.this , MainActivity.class);
+            startActivity(goToMain);
         });
     }
 }
