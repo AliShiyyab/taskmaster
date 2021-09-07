@@ -1,5 +1,6 @@
 package com.example.taskmaster;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,6 +9,9 @@ import androidx.room.Room;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +23,7 @@ import android.widget.Toast;
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.taskmaster;
 
@@ -33,6 +38,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        try {
+            // Add these lines to add the AWSApiPlugin plugins
+            Amplify.addPlugin(new AWSApiPlugin());
+            Amplify.configure(getApplicationContext());
+            Log.i("MyAmplifyApp", "Initialized Amplify");
+        } catch (
+                AmplifyException error) {
+            Log.e("MyAmplifyApp", "Could not initialize Amplify", error);
+        }
 
         //Amplify -> Amplify.addPlugin(new AWSApiPlugin());
 
@@ -110,17 +125,35 @@ public class MainActivity extends AppCompatActivity {
 //        allTasksRecuclerView.setLayoutManager(new LinearLayoutManager(this));
 //        allTasksRecuclerView.setAdapter(new ViewAdapter(listTask));
 
-        RecyclerView allTasksRecuclerView = findViewById(R.id.taskRecucleView);
 
-        try {
-            // Add these lines to add the AWSApiPlugin plugins
-            Amplify.addPlugin(new AWSApiPlugin());
-            Amplify.configure(getApplicationContext());
-            Log.i("MyAmplifyApp", "Initialized Amplify");
-        } catch (AmplifyException error) {
-            Log.e("MyAmplifyApp", "Could not initialize Amplify", error);
-        }
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        RecyclerView recuclerView = findViewById(R.id.taskRecucleView);
+        Handler handler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
+            @Override
+            public boolean handleMessage(@NonNull Message msg) {
+                recuclerView.getAdapter().notifyDataSetChanged();
+                return false;
+            }
+        });
+        ArrayList<taskmaster> arrayList = new ArrayList<taskmaster>();
+        recuclerView.setLayoutManager(new LinearLayoutManager(this));
+        recuclerView.setAdapter(new ViewAdapter(arrayList));
+
+        Amplify.API.query(ModelQuery.list(taskmaster.class) , response -> {
+            for (taskmaster tasks : response.getData()){
+                Log.i("MyAmplifyApp" , tasks.getTitle());
+                Log.i("MyAmplifyApp" , tasks.getBody());
+                Log.i("MyAmplifyApp" , tasks.getState());
+                arrayList.add(tasks);
+            }
+            handler.sendEmptyMessage(1);
+            Log.i("MyAmplifyApp", "Out of Loop!");
+        }, error -> Log.e("MyAmplifyApp", "Query failure", error));
     }
 
     @Override
