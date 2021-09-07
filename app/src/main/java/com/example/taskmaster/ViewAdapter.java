@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Delete;
 
+import com.amplifyframework.datastore.generated.model.taskmaster;
 import com.example.taskmaster.R;
 
 import java.util.ArrayList;
@@ -17,14 +18,14 @@ import java.util.List;
 
 
 public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.TaskViewHolder> {
-    private List<Task> taskList = new ArrayList<Task>();
+    private ArrayList<taskmaster> taskList = new ArrayList<>();
 
-    public ViewAdapter(List<Task> allTasks){
+    public ViewAdapter(ArrayList<taskmaster> allTasks){
         this.taskList = allTasks;
     }
 
     public static class TaskViewHolder extends RecyclerView.ViewHolder{
-        public Task task;
+        public taskmaster task;
         View itemView;
         public TaskViewHolder(@NonNull View itemView){
             super(itemView);
