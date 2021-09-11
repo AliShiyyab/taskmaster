@@ -26,6 +26,7 @@ import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.taskmaster;
+import com.amplifyframework.datastore.generated.model.team;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -116,14 +117,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(gotToSetting);
             }
         });
-//        TaskDataBase db = Room.databaseBuilder(getApplicationContext(), TaskDataBase.class, "task")
-//                .allowMainThreadQueries().build();
-//        RecyclerView allTasksRecuclerView = findViewById(R.id.taskRecucleView);
-//        List<Task> listTask;
-//        taskDAO = db.taskDAO();
-//        listTask = taskDAO.getAll();
-//        allTasksRecuclerView.setLayoutManager(new LinearLayoutManager(this));
-//        allTasksRecuclerView.setAdapter(new ViewAdapter(listTask));
+
 
 
 

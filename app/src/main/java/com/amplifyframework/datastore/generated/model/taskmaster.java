@@ -1,5 +1,6 @@
 package com.amplifyframework.datastore.generated.model;
 
+import com.amplifyframework.core.model.annotations.BelongsTo;
 import com.amplifyframework.core.model.temporal.Temporal;
 
 import java.util.List;
@@ -19,15 +20,18 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 /** This is an auto generated class representing the taskmaster type in your schema. */
 @SuppressWarnings("all")
 @ModelConfig(pluralName = "taskmasters")
+@Index(name = "taskmasterItem", fields = {"teamID"})
 public final class taskmaster implements Model {
   public static final QueryField ID = field("taskmaster", "id");
   public static final QueryField TITLE = field("taskmaster", "title");
   public static final QueryField BODY = field("taskmaster", "body");
   public static final QueryField STATE = field("taskmaster", "state");
+  public static final QueryField TEAMS = field("taskmaster", "teamID");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String title;
   private final @ModelField(targetType="String", isRequired = true) String body;
-  private final @ModelField(targetType="String") String state;
+  private final @ModelField(targetType="String", isRequired = true) String state;
+  private final @ModelField(targetType="team", isRequired = true) @BelongsTo(targetName = "teamID", type = team.class) team teams;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   public String getId() {
@@ -46,6 +50,10 @@ public final class taskmaster implements Model {
       return state;
   }
   
+  public team getTeams() {
+      return teams;
+  }
+  
   public Temporal.DateTime getCreatedAt() {
       return createdAt;
   }
@@ -54,11 +62,12 @@ public final class taskmaster implements Model {
       return updatedAt;
   }
   
-  private taskmaster(String id, String title, String body, String state) {
+  private taskmaster(String id, String title, String body, String state, team teams) {
     this.id = id;
     this.title = title;
     this.body = body;
     this.state = state;
+    this.teams = teams;
   }
   
   @Override
@@ -73,6 +82,7 @@ public final class taskmaster implements Model {
               ObjectsCompat.equals(getTitle(), taskmaster.getTitle()) &&
               ObjectsCompat.equals(getBody(), taskmaster.getBody()) &&
               ObjectsCompat.equals(getState(), taskmaster.getState()) &&
+              ObjectsCompat.equals(getTeams(), taskmaster.getTeams()) &&
               ObjectsCompat.equals(getCreatedAt(), taskmaster.getCreatedAt()) &&
               ObjectsCompat.equals(getUpdatedAt(), taskmaster.getUpdatedAt());
       }
@@ -85,6 +95,7 @@ public final class taskmaster implements Model {
       .append(getTitle())
       .append(getBody())
       .append(getState())
+      .append(getTeams())
       .append(getCreatedAt())
       .append(getUpdatedAt())
       .toString()
@@ -99,6 +110,7 @@ public final class taskmaster implements Model {
       .append("title=" + String.valueOf(getTitle()) + ", ")
       .append("body=" + String.valueOf(getBody()) + ", ")
       .append("state=" + String.valueOf(getState()) + ", ")
+      .append("teams=" + String.valueOf(getTeams()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
       .append("updatedAt=" + String.valueOf(getUpdatedAt()))
       .append("}")
@@ -132,6 +144,7 @@ public final class taskmaster implements Model {
       id,
       null,
       null,
+      null,
       null
     );
   }
@@ -140,7 +153,8 @@ public final class taskmaster implements Model {
     return new CopyOfBuilder(id,
       title,
       body,
-      state);
+      state,
+      teams);
   }
   public interface TitleStep {
     BodyStep title(String title);
@@ -148,22 +162,32 @@ public final class taskmaster implements Model {
   
 
   public interface BodyStep {
-    BuildStep body(String body);
+    StateStep body(String body);
+  }
+  
+
+  public interface StateStep {
+    TeamsStep state(String state);
+  }
+  
+
+  public interface TeamsStep {
+    BuildStep teams(team teams);
   }
   
 
   public interface BuildStep {
     taskmaster build();
     BuildStep id(String id) throws IllegalArgumentException;
-    BuildStep state(String state);
   }
   
 
-  public static class Builder implements TitleStep, BodyStep, BuildStep {
+  public static class Builder implements TitleStep, BodyStep, StateStep, TeamsStep, BuildStep {
     private String id;
     private String title;
     private String body;
     private String state;
+    private team teams;
     @Override
      public taskmaster build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -172,7 +196,8 @@ public final class taskmaster implements Model {
           id,
           title,
           body,
-          state);
+          state,
+          teams);
     }
     
     @Override
@@ -183,15 +208,23 @@ public final class taskmaster implements Model {
     }
     
     @Override
-     public BuildStep body(String body) {
+     public StateStep body(String body) {
         Objects.requireNonNull(body);
         this.body = body;
         return this;
     }
     
     @Override
-     public BuildStep state(String state) {
+     public TeamsStep state(String state) {
+        Objects.requireNonNull(state);
         this.state = state;
+        return this;
+    }
+    
+    @Override
+     public BuildStep teams(team teams) {
+        Objects.requireNonNull(teams);
+        this.teams = teams;
         return this;
     }
     
@@ -207,11 +240,12 @@ public final class taskmaster implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String title, String body, String state) {
+    private CopyOfBuilder(String id, String title, String body, String state, team teams) {
       super.id(id);
       super.title(title)
         .body(body)
-        .state(state);
+        .state(state)
+        .teams(teams);
     }
     
     @Override
@@ -227,6 +261,11 @@ public final class taskmaster implements Model {
     @Override
      public CopyOfBuilder state(String state) {
       return (CopyOfBuilder) super.state(state);
+    }
+    
+    @Override
+     public CopyOfBuilder teams(team teams) {
+      return (CopyOfBuilder) super.teams(teams);
     }
   }
   
