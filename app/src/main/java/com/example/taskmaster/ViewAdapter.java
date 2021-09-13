@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Delete;
 
 import com.amplifyframework.datastore.generated.model.taskmaster;
+import com.amplifyframework.datastore.generated.model.team;
 import com.example.taskmaster.R;
 
 import java.util.ArrayList;
