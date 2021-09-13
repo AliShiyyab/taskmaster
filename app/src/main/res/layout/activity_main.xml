@@ -7,6 +7,21 @@
     tools:context=".MainActivity">
 
     <Button
+        android:id="@+id/button6"
+        android:layout_width="100dp"
+        android:layout_height="66dp"
+        android:gravity="center"
+        android:text="All Task"
+        android:textColor="#fff"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.063"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.218" />
+
+    <Button
         android:id="@+id/levelFour"
         android:layout_width="99dp"
         android:layout_height="90dp"
@@ -21,8 +36,8 @@
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="161dp"
-        android:layout_height="72dp"
+        android:layout_width="98dp"
+        android:layout_height="71dp"
         android:gravity="center"
         android:text="Add Task"
         android:textColor="#fff"
@@ -35,19 +50,19 @@
         app:layout_constraintVertical_bias="0.218" />
 
     <Button
-        android:id="@+id/button4"
-        android:layout_width="161dp"
-        android:layout_height="72dp"
+        android:id="@+id/SignOut"
+        android:layout_width="100dp"
+        android:layout_height="66dp"
         android:gravity="center"
-        android:text="All Task"
+        android:text="SignOut"
         android:textColor="#fff"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.063"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.218" />
+        app:layout_constraintVertical_bias="0.224" />
 
     <TextView
         android:id="@+id/textView"
