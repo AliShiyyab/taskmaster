@@ -24,7 +24,11 @@ import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.auth.AuthUserAttributeKey;
+import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
+import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.AWSDataStorePlugin;
 import com.amplifyframework.datastore.generated.model.taskmaster;
 import com.amplifyframework.datastore.generated.model.team;
 
@@ -43,12 +47,44 @@ public class MainActivity extends AppCompatActivity {
         try {
             // Add these lines to add the AWSApiPlugin plugins
             Amplify.addPlugin(new AWSApiPlugin());
+            Amplify.addPlugin(new AWSCognitoAuthPlugin());
             Amplify.configure(getApplicationContext());
+            Amplify.addPlugin(new AWSDataStorePlugin());
             Log.i("MyAmplifyApp", "Initialized Amplify");
         } catch (
                 AmplifyException error) {
             Log.e("MyAmplifyApp", "Could not initialize Amplify", error);
         }
+
+        //signup
+//        AuthSignUpOptions options = AuthSignUpOptions.builder()
+//                .userAttribute(AuthUserAttributeKey.email(), "aliakefsh@gmail.com")
+//                .build();
+//        Amplify.Auth.signUp("Shiyyab's", "Ali2221998", options,
+//                result -> Log.i("AuthQuickStart", "Result: " + result.toString()),
+//                error -> Log.e("AuthQuickStart", "Sign up failed", error)
+//        );
+
+        //signIn
+//        Amplify.Auth.signIn(
+//                "Shiyyab's",
+//                "Ali2221998",
+//                result -> Log.i("AuthQuickstart", result.isSignInComplete() ? "Sign in succeeded" : "Sign in not complete"),
+//                error -> Log.e("AuthQuickstart", error.toString())
+//        );
+
+        //Confirmation code
+//        Amplify.Auth.confirmSignUp(
+//                "Shiyyab's",
+//                "927631",
+//                result -> Log.i("AuthQuickstart", result.isSignUpComplete() ? "Confirm signUp succeeded" : "Confirm sign up not complete"),
+//                error -> Log.e("AuthQuickstart", error.toString())
+//        );
+
+//        Amplify.Auth.fetchAuthSession(
+//                result -> Log.i("AmplifyQuickstart", result.toString()),
+//                error -> Log.e("AmplifyQuickstart", error.toString())
+//        );
 
         //Amplify -> Amplify.addPlugin(new AWSApiPlugin());
 
@@ -119,8 +155,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-
     }
 
     @Override
@@ -134,16 +168,31 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-        ArrayList<taskmaster> arrayList = new ArrayList<taskmaster>();
-        recuclerView.setLayoutManager(new LinearLayoutManager(this));
-        recuclerView.setAdapter(new ViewAdapter(arrayList));
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        String userName = sharedPreferences.getString("userName", "Ali");
+        String teamIdFromSettings = sharedPreferences.getString("Team", "");
 
-        Amplify.API.query(ModelQuery.list(taskmaster.class) , response -> {
-            for (taskmaster tasks : response.getData()){
-                Log.i("MyAmplifyApp" , tasks.getTitle());
-                Log.i("MyAmplifyApp" , tasks.getBody());
-                Log.i("MyAmplifyApp" , tasks.getState());
-                arrayList.add(tasks);
+        System.out.println(teamIdFromSettings);
+
+        TextView userNameView = findViewById(R.id.homeUserName);
+        userNameView.setText(userName + " tasks");
+        ArrayList<taskmaster> arrayList = new ArrayList<taskmaster>();
+        ArrayList<taskmaster> arrayList1 = new ArrayList<taskmaster>();
+        recuclerView.setLayoutManager(new LinearLayoutManager(this));
+        recuclerView.setAdapter(new ViewAdapter(arrayList1));
+//        recuclerView.setAdapter(new ViewAdapter(arrayList1));
+
+        Amplify.API.query(ModelQuery.list(taskmaster.class), response -> {
+            for (taskmaster tasksss : response.getData()) {
+                Log.i("MyAmplifyApp", tasksss.getTitle());
+                Log.i("MyAmplifyApp", tasksss.getBody());
+                Log.i("MyAmplifyApp", tasksss.getState());
+                arrayList.add(tasksss);
+            }
+            for (int i = 0 ; i < arrayList.size(); i++){
+                if (arrayList.get(i).getTeams().getName().equals(teamIdFromSettings)){
+                    arrayList1.add(arrayList.get(i));
+                }
             }
             handler.sendEmptyMessage(1);
             Log.i("MyAmplifyApp", "Out of Loop!");
@@ -154,10 +203,5 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-        String userName = sharedPreferences.getString("userName", "Ali");
-
-        TextView userNameView = findViewById(R.id.homeUserName);
-        userNameView.setText(userName + " tasks");
     }
 }
