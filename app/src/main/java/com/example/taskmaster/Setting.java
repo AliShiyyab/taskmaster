@@ -31,13 +31,7 @@ public class Setting extends AppCompatActivity {
 
         RadioGroup radioGroup = findViewById(R.id.radioGroupBox);
 
-        radioGroup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-
-            }
-        });
 
         //----------------------------------------------------------
         Button btn = findViewById(R.id.button5);

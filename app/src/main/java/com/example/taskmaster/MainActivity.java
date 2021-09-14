@@ -23,7 +23,9 @@ import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.AWSDataStorePlugin;
 import com.amplifyframework.datastore.generated.model.taskmaster;
+import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 
 import java.util.ArrayList;
 
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
             // Add these lines to add the AWSApiPlugin plugins
             Amplify.addPlugin(new AWSApiPlugin());
             Amplify.addPlugin(new AWSCognitoAuthPlugin());
+            Amplify.addPlugin(new AWSS3StoragePlugin());
             Amplify.configure(getApplicationContext());
 //            Amplify.addPlugin(new AWSDataStorePlugin());
             Log.i("MyAmplifyApp", "Initialized Amplify");
@@ -144,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
         });
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
         String userName = sharedPreferences.getString("userName", "Ali");
-        String teamIdFromSettings = sharedPreferences.getString("Team", "First Team");
+        String teamIdFromSettings = sharedPreferences.getString("Team", "");
 
         System.out.println(teamIdFromSettings);
 
