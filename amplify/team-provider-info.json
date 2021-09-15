@@ -1,21 +1,28 @@
 {
-  "teskmaster": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-taskmaster-teskmaster-174214-authRole",
-      "UnauthRoleArn": "arn:aws:iam::825807334512:role/amplify-taskmaster-teskmaster-174214-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::825807334512:role/amplify-taskmaster-teskmaster-174214-authRole",
-      "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-taskmaster-teskmaster-174214-deployment",
-      "UnauthRoleName": "amplify-taskmaster-teskmaster-174214-unauthRole",
-      "StackName": "amplify-taskmaster-teskmaster-174214",
-      "StackId": "arn:aws:cloudformation:us-east-1:825807334512:stack/amplify-taskmaster-teskmaster-174214/c3af04c0-0f20-11ec-bc4f-121b717d717f",
-      "AmplifyAppId": "d1cwzu765nfvff"
-    },
-    "categories": {
-      "auth": {
-        "taskmaster0b34fd48": {},
-        "taskmasterc1852df0": {}
-      }
+    "teskmaster": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-taskmaster-teskmaster-174214-authRole",
+            "UnauthRoleArn": "arn:aws:iam::825807334512:role/amplify-taskmaster-teskmaster-174214-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::825807334512:role/amplify-taskmaster-teskmaster-174214-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-taskmaster-teskmaster-174214-deployment",
+            "UnauthRoleName": "amplify-taskmaster-teskmaster-174214-unauthRole",
+            "StackName": "amplify-taskmaster-teskmaster-174214",
+            "StackId": "arn:aws:cloudformation:us-east-1:825807334512:stack/amplify-taskmaster-teskmaster-174214/c3af04c0-0f20-11ec-bc4f-121b717d717f",
+            "AmplifyAppId": "d1cwzu765nfvff"
+        },
+        "categories": {
+            "auth": {
+                "taskmaster0b34fd48": {},
+                "taskmasterc1852df0": {}
+            },
+            "notifications": {
+                "Pinpoint": {
+                    "Name": "taskmasterHuM9h-teskmaster",
+                    "Id": "ae562d6ddaf64a438cc4727f387d3b0b",
+                    "Region": "us-east-1"
+                }
+            }
+        }
     }
-  }
 }
